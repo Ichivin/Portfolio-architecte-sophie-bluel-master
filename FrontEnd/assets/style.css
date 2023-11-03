@@ -282,6 +282,12 @@ footer nav ul {
     border-radius: 10px;
     background: #fff;
     display: flex;
+    position: relative;
+    overflow: hidden;
+}
+
+.modale-page1 {
+    display: flex;
     flex-direction: column;
 }
 
@@ -364,4 +370,38 @@ footer nav ul {
     border: none;
     margin-top: 38px;
     cursor: pointer;
+}
+
+.modale-page2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    right: -100%;
+    top: 0px;
+    background-color: white;
+    z-index: 1;
+}
+
+.modale-slide-left {
+    animation: slideLeft 0.4s forwards;
+}
+
+@keyframes slideLeft {
+    0% {
+        right: -100%;
+    }
+    100% {
+        right: 0;
+    }
+}
+
+.modale-back {
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    border: none;
+    background: none;
 }
