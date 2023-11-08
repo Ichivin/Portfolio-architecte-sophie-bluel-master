@@ -43,6 +43,22 @@ function openModale(gallery) {
     modalePage2.className = "modale-page2";
     modaleWhite.appendChild(modalePage2);
 
+    const modaleClose2 = document.createElement("button");
+    modaleClose2.className = "modale-close";
+    modalePage2.appendChild(modaleClose2);
+    modaleClose2.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+    modaleClose2.addEventListener("click", () => {
+        modaleContainer.innerHTML = "";
+    });
+
+    const modaleBack = document.createElement("button");
+    modaleBack.className = "modale-back";
+    modalePage2.appendChild(modaleBack);
+    modaleBack.innerHTML = '<i class="fa-solid fa-arrow-left"></i>';
+    modaleBack.addEventListener("click", () => {
+        modalePage2.className = "modale-page2";
+    });
+
     const modaleTitle2 = document.createElement("h2");
     modaleTitle2.className = "modale-title2";
     modalePage2.appendChild(modaleTitle2);
@@ -52,19 +68,27 @@ function openModale(gallery) {
     form.className = "modale-page2__form";
     modalePage2.appendChild(form);
 
+    const divAddImage = document.createElement("div");
+    divAddImage.className = "modale-page2__div-add-image";
+    divAddImage.innerHTML = '<i class="fa-regular fa-image modale-page2__icon"></i>';
+    form.appendChild(divAddImage);
+
     const inputFile = document.createElement("input");
     inputFile.name = "image";
     inputFile.type = "file";
-    inputFile.className = "modale-page2__file";
-    form.appendChild(inputFile);
+    inputFile.setAttribute("id", "file");
+    divAddImage.appendChild(inputFile);
 
-    const modaleBack = document.createElement("button");
-    modaleBack.className = "modale-back";
-    modalePage2.appendChild(modaleBack);
-    modaleBack.innerHTML = '<i class="fa-solid fa-arrow-left"></i>';
-    modaleBack.addEventListener("click", () => {
-        modalePage2.className = "modale-page2";
-    });
+    const inputFileLabel = document.createElement("label");
+    inputFileLabel.className = "modale-page2__file";
+    inputFileLabel.setAttribute("for", "file");
+    divAddImage.appendChild(inputFileLabel);
+    inputFileLabel.innerText = "+ Ajouter photo";
+
+    const tailleImage = document.createElement("p");
+    tailleImage.className = "modale-page2__taille-image";
+    tailleImage.innerText = "jpg, png : 4mo max";
+    divAddImage.appendChild(tailleImage);
 
     const formFieldTitle = document.createElement("div");
     formFieldTitle.className = "form-field";
@@ -77,7 +101,7 @@ function openModale(gallery) {
     titleLabel.innerText = "Titre";
 
     const modalePage2TextArea = document.createElement("input");
-    modalePage2TextArea.className = "modale-page2-text-area";
+    modalePage2TextArea.className = "modale-page2__text-area";
     formFieldTitle.appendChild(modalePage2TextArea);
 
     const formFieldSelect = document.createElement("div");
@@ -91,7 +115,7 @@ function openModale(gallery) {
 
     const modalePage2Select = document.createElement("select");
     modalePage2Select.name = "category";
-    modalePage2Select.className = "modale-page2-select";
+    modalePage2Select.className = "modale-page2__select";
     formFieldSelect.appendChild(modalePage2Select);
 
     fetch("http://localhost:5678/api/categories")
@@ -105,30 +129,29 @@ function openModale(gallery) {
             });
         });
 
+    const divBarre = document.createElement("div");
+    divBarre.className = "modale-page2__div-barre";
+    form.appendChild(divBarre);
+
     const submitButton = document.createElement("button");
     submitButton.className = "submit-button";
+    submitButton.innerText = "Valider";
     form.appendChild(submitButton);
     form.addEventListener("submit", (e) => {
         e.preventDefault();
-        console.log(localStorage.getItem("user_id"));
-        console.log(localStorage.getItem("Sophie_token"));
+        const data = new FormData(document.querySelector(".modale-page2__form"));
+
         fetch("http://localhost:5678/api/works", {
             method: "POST",
             headers: {
-                accept: "application/json",
-                "Content-Type": "multipart/form-data",
-                Authorization: `Bearer {   "userId": ${localStorage.getItem("user_id")},   
-                    "token": ${localStorage.getItem("Sophie_token")}`,
+                Authorization: `Bearer ${localStorage.getItem("Sophie_token")}`,
             },
+            body: data,
         })
             .then((response) => response.json())
-            .then((loginData) => {
-                if (!loginData.error) {
-                    localStorage.setItem("Sophie_token", loginData.token);
-                    localStorage.setItem("user_id", loginData.userId);
-                    window.location.assign("./index.html");
-                } else {
-                    alert("Adresse Email ou Mot de passe invalide");
+            .then((addImage) => {
+                if (addImage.error) {
+                    alert("Echec de l'ajout d'image");
                 }
             });
     });

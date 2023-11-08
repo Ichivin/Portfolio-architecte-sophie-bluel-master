@@ -202,7 +202,6 @@ li:hover {
 }
 #portfolio h2 {
     text-align: center;
-    margin-bottom: 1em;
 }
 .gallery {
     width: 100%;
@@ -261,6 +260,55 @@ footer nav ul {
     display: flex;
     justify-content: flex-end;
     margin: 2em;
+}
+
+#filter-list {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 50px;
+}
+
+.filter-button {
+    height: 37px;
+    border-radius: 60px;
+    border: 1px solid #1d6154;
+    background-color: white;
+    color: #1d6154;
+    text-align: center;
+    font-family: Syne;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.filter-button:hover {
+    background: #1d6154;
+    color: white;
+    cursor: pointer;
+}
+
+#project-title {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 31px;
+}
+
+.edit-button {
+    color: #000;
+    text-align: center;
+    font-family: Work Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    border: none;
+    background: none;
+    cursor: pointer;
 }
 
 .modale-background {
@@ -404,4 +452,136 @@ footer nav ul {
     top: 15px;
     border: none;
     background: none;
+}
+
+.modale-title2 {
+    color: #000;
+    text-align: center;
+    font-family: Work Sans;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 36px;
+}
+
+.modale-page2__form {
+    display: flex;
+    flex-direction: column;
+}
+
+.modale-page2__icon {
+    font-size: 76px;
+    color: #b9c5cc;
+    margin-top: 13px;
+    margin-bottom: 6px;
+}
+
+.modale-page2__div-add-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #e8f1f6;
+    width: 420px;
+    height: 169px;
+}
+
+.modale-page2__file {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 173px;
+    height: 36px;
+    border-radius: 50px;
+    background: #cbd6dc;
+    color: #306685;
+    text-align: center;
+    font-family: Work Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.modale-page2__taille-image {
+    color: #444;
+    text-align: center;
+    font-family: Work Sans;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-top: 7px;
+}
+
+#file {
+    height: 0;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.title-label {
+    color: #3d3d3d;
+    font-family: Work Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-top: 36px;
+    margin-bottom: 10px;
+}
+
+.modale-page2__text-area {
+    width: 420px;
+    height: 51px;
+    background: #fff;
+    box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
+    border: none;
+    outline: none;
+    color: #444;
+    font-family: Work Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-left: 16px;
+}
+.modale-page2__select {
+    width: 420px;
+    height: 51px;
+    background: #fff;
+    box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
+    border: none;
+    color: #444;
+    font-family: Work Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-left: 16px;
+}
+
+.submit-button {
+    align-self: center;
+    width: 237px;
+    height: 36px;
+    border-radius: 60px;
+    background: #a7a7a7;
+    border: none;
+    color: white;
+    font-family: Syne;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-top: 32px;
+}
+
+.modale-page2__div-barre {
+    border-bottom: 1px solid #b3b3b3;
+    padding-bottom: 32px;
+    margin-top: 10px;
 }

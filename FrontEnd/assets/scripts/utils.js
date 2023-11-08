@@ -34,9 +34,7 @@ function displayModaleImages(images_, divImage) {
             fetch(`http://localhost:5678/api/works/${image.id}`, {
                 method: "DELETE",
                 headers: {
-                    accept: "*/*",
-                    Authorization: `Bearer {   "userId": ${localStorage.getItem("user_id")},   
-                    "token": ${localStorage.getItem("Sophie_token")}`,
+                    Authorization: `Bearer ${localStorage.getItem("Sophie_token")}`,
                 },
             });
         });
