@@ -128,6 +128,11 @@ table {
     border-spacing: 0;
 }
 /** end reset css**/
+
+img {
+    object-fit: cover;
+}
+
 body {
     max-width: 1140px;
     margin: auto;
@@ -484,6 +489,7 @@ footer nav ul {
     background-color: #e8f1f6;
     width: 420px;
     height: 169px;
+    position: relative;
 }
 
 .modale-page2__file {
@@ -584,4 +590,12 @@ footer nav ul {
     border-bottom: 1px solid #b3b3b3;
     padding-bottom: 32px;
     margin-top: 10px;
+}
+
+.modale-page2__image-preview img {
+    position: absolute;
+    width: 65px;
+    height: 95px;
+    top: calc(50% - 47px);
+    left: calc(50% - 32px);
 }
