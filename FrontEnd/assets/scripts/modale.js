@@ -168,11 +168,17 @@ function openModale(gallery) {
     form.appendChild(submitButton);
     form.addEventListener("submit", (e) => {
         e.preventDefault();
-        const data = new FormData(document.querySelector(".modale-page2__form"));
-
+        const data = new FormData();
+        data.append("image", inputFile.files[0]);
+        data.append("title", modalePage2TextArea.value);
+        console.log(modalePage2TextArea.value);
+        data.append("category", modalePage2Select.value);
+        console.log(modalePage2Select.value);
+        console.log(data.entries());
         fetch("http://localhost:5678/api/works", {
             method: "POST",
             headers: {
+                accept: "application/json",
                 Authorization: `Bearer ${localStorage.getItem("Sophie_token")}`,
             },
             body: data,
