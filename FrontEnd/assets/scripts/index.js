@@ -1,4 +1,3 @@
-const divImage = document.getElementById("gallery");
 const filterTous = document.querySelector(".filter-button");
 const login = document.querySelector(".login");
 

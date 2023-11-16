@@ -10,21 +10,28 @@ function openModale(gallery) {
     });
     modaleContainer.appendChild(modaleBackground);
 
-    const modaleWhite = document.createElement("div");
+    /*const modaleWhite = document.createElement("div");
     modaleWhite.className = "modale-white";
-    modaleBackground.appendChild(modaleWhite);
+    modaleBackground.appendChild(modaleWhite);*/
+
+    const modaleWhite = createHtmlElement("div", "modale-white", modaleBackground, null, null);
 
     const modalePage1 = document.createElement("div");
     modalePage1.className = "modale-page1";
     modaleWhite.appendChild(modalePage1);
 
-    const modaleClose = document.createElement("button");
+    /*const modaleClose = document.createElement("button");
     modaleClose.className = "modale-close";
     modalePage1.appendChild(modaleClose);
     modaleClose.innerHTML = '<i class="fa-solid fa-xmark"></i>';
     modaleClose.addEventListener("click", () => {
         modaleContainer.innerHTML = "";
+    });*/
+
+    const modaleClose = createHtmlElement("button", "modale-close", modalePage1, "click", () => {
+        modaleContainer.innerHTML = "";
     });
+    modaleClose.innerHTML = '<i class="fa-solid fa-xmark"></i>';
 
     const modaleTitle = document.createElement("h2");
     modaleTitle.className = "modale-title";
@@ -171,14 +178,11 @@ function openModale(gallery) {
         const data = new FormData();
         data.append("image", inputFile.files[0]);
         data.append("title", modalePage2TextArea.value);
-        console.log(modalePage2TextArea.value);
         data.append("category", modalePage2Select.value);
-        console.log(modalePage2Select.value);
-        console.log(data.entries());
+
         fetch("http://localhost:5678/api/works", {
             method: "POST",
             headers: {
-                accept: "application/json",
                 Authorization: `Bearer ${localStorage.getItem("Sophie_token")}`,
             },
             body: data,
@@ -188,6 +192,12 @@ function openModale(gallery) {
                 if (addImage.error) {
                     alert("Echec de l'ajout d'image");
                 }
+
+                modaleWhite.style.display = "none";
+                modaleBackground.style.display = "none";
+                images.push(addImage);
+                const gallery = document.querySelector(".gallery");
+                displayImages(images, gallery);
             });
     });
 
