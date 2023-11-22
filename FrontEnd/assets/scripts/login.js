@@ -1,8 +1,8 @@
 const email = document.getElementById("email");
 const password = document.getElementById("password");
-const connexion = document.querySelector(".connexion");
+const loginButton = document.querySelector(".connexion");
 
-connexion.addEventListener("click", (e) => {
+loginButton.addEventListener("click", (e) => {
     e.preventDefault();
     console.log(email.value);
     console.log(password.value);

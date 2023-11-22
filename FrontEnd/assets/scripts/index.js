@@ -1,15 +1,15 @@
-const filterTous = document.querySelector(".filter-button");
-const login = document.querySelector(".login");
+const filterButtonAll = document.querySelector(".filter-button");
+const loginButton = document.querySelector(".login");
 
-let images = [];
-let filterImages = [];
+let allImagesTable = [];
+let filteredImagesTable = [];
 
 fetch("http://localhost:5678/api/works")
     .then((response) => response.json())
     .then((data) => {
-        images = data;
-        displayImages(images, divImage);
-        filterImages = images;
+        allImagesTable = [...data];
+        displayImages(allImagesTable, galleryContainer);
+        filteredImagesTable = [...allImagesTable];
     });
 
 const filterList = document.getElementById("filter-list");
@@ -23,31 +23,33 @@ fetch("http://localhost:5678/api/categories")
             button.innerText = category.name;
             button.addEventListener("click", () => {
                 console.log(category.id);
-                filterImages = images.filter((image) => {
+                filteredImagesTable = allImagesTable.filter((image) => {
                     return image.categoryId == category.id;
                 });
-                displayImages(filterImages, divImage);
+                displayImages(filteredImagesTable, galleryContainer);
             });
             li.appendChild(button);
             filterList.appendChild(li);
         });
-        filterTous.addEventListener("click", () => {
-            displayImages(images, divImage);
+        filterButtonAll.addEventListener("click", () => {
+            displayImages(allImagesTable, galleryContainer);
         });
     });
 
 if (localStorage.getItem("Sophie_token")) {
-    const button = document.createElement("button");
-    button.innerHTML = '<i class="fa-regular fa-pen-to-square"></i>Modifier';
-    button.className = "edit-button";
-    document.getElementById("project-title").appendChild(button);
-    login.innerText = "logout";
-    login.addEventListener("click", (e) => {
+    const editBlock = document.querySelector(".edit-block");
+    editBlock.style.display = "flex";
+    const editButton = document.createElement("button");
+    editButton.innerHTML = '<i class="fa-regular fa-pen-to-square"></i>Modifier';
+    editButton.className = "edit-button";
+    document.getElementById("project-title").appendChild(editButton);
+    loginButton.innerText = "logout";
+    loginButton.addEventListener("click", (e) => {
         e.preventDefault();
         localStorage.removeItem("Sophie_token");
         window.location.assign("./index.html");
     });
-    button.addEventListener("click", () => {
-        openModale(images);
+    editButton.addEventListener("click", () => {
+        openModal(allImagesTable);
     });
 }

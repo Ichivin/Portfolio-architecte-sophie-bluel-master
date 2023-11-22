@@ -600,3 +600,18 @@ footer nav ul {
     top: calc(50% - 85px);
     left: calc(50% - 85px);
 }
+
+.edit-block {
+    display: none;
+    height: 59px;
+    background: #000;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: Work Sans;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

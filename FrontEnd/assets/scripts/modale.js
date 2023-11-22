@@ -1,4 +1,4 @@
-function openModale(gallery) {
+function openModal(gallery) {
     const modaleContainer = document.getElementById("modale-container");
     modaleContainer.innerHTML = "";
 
@@ -21,7 +21,7 @@ function openModale(gallery) {
     modaleTitle.innerText = "Galerie photo";
 
     const modaleGallery = createHtmlElement("div", "modale-gallery", modalePage1, null, null);
-    displayModaleImages(gallery, modaleGallery);
+    displayModalImages(gallery, modaleGallery);
 
     const addImage = createHtmlElement("button", "add-image", modalePage1, "click", () => {
         modalePage2.className = "modale-page2 modale-slide-left";
@@ -81,20 +81,24 @@ function openModale(gallery) {
 
     const titleLabel = createHtmlElement("label", "title-label", formFieldTitle, null, null);
     titleLabel.innerText = "Titre";
+    titleLabel.setAttribute("for", "modale-page2__text-area");
 
     const modalePage2TextArea = createHtmlElement("input", "modale-page2__text-area", formFieldTitle, "change", () => {
         updateSubmitButton();
     });
+    modalePage2TextArea.setAttribute("id", "modale-page2__text-area");
 
     const formFieldSelect = createHtmlElement("div", "form-field", form, null, null);
 
     const categoryLabel = createHtmlElement("label", "title-label", formFieldSelect, null, null);
     categoryLabel.innerText = "Catégorie";
+    categoryLabel.setAttribute("for", "modale-page2__select");
 
     const modalePage2Select = createHtmlElement("select", "modale-page2__select", formFieldSelect, "change", () => {
         updateSubmitButton();
     });
     modalePage2Select.name = "category";
+    modalePage2Select.setAttribute("id", "modale-page2__select");
 
     fetch("http://localhost:5678/api/categories")
         .then((response) => response.json())
@@ -107,7 +111,7 @@ function openModale(gallery) {
             });
         });
 
-    const modalePage2__line = createHtmlElement("div", "modale-page2__line", form, null, null);
+    const modalePage2Line = createHtmlElement("div", "modale-page2__line", form, null, null);
 
     const submitButton = createHtmlElement("button", "submit-button", form, null, null);
     submitButton.innerText = "Valider";
@@ -127,16 +131,17 @@ function openModale(gallery) {
             body: data,
         })
             .then((response) => response.json())
-            .then((addImage) => {
-                if (addImage.error) {
+            .then((addedImage) => {
+                if (addedImage.error) {
                     alert("Echec de l'ajout d'image");
+                } else {
+                    /*alert("Votre image a bien été ajoutée. ");*/
+                    modaleWhite.style.display = "none";
+                    modaleBackground.style.display = "none";
+                    allImagesTable.push(addedImage);
+                    const gallery = document.querySelector(".gallery");
+                    displayImages(allImagesTable, gallery);
                 }
-
-                modaleWhite.style.display = "none";
-                modaleBackground.style.display = "none";
-                images.push(addImage);
-                const gallery = document.querySelector(".gallery");
-                displayImages(images, gallery);
             });
     });
 
