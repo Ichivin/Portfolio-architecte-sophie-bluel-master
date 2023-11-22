@@ -1,89 +1,52 @@
 function openModale(gallery) {
     const modaleContainer = document.getElementById("modale-container");
     modaleContainer.innerHTML = "";
-    const modaleBackground = document.createElement("div");
-    modaleBackground.className = "modale-background";
-    modaleBackground.addEventListener("click", (e) => {
+
+    const modaleBackground = createHtmlElement("div", "modale-background", modaleContainer, "click", (e) => {
         if (e.target == modaleBackground) {
             modaleContainer.innerHTML = "";
         }
     });
-    modaleContainer.appendChild(modaleBackground);
-
-    /*const modaleWhite = document.createElement("div");
-    modaleWhite.className = "modale-white";
-    modaleBackground.appendChild(modaleWhite);*/
 
     const modaleWhite = createHtmlElement("div", "modale-white", modaleBackground, null, null);
 
-    const modalePage1 = document.createElement("div");
-    modalePage1.className = "modale-page1";
-    modaleWhite.appendChild(modalePage1);
-
-    /*const modaleClose = document.createElement("button");
-    modaleClose.className = "modale-close";
-    modalePage1.appendChild(modaleClose);
-    modaleClose.innerHTML = '<i class="fa-solid fa-xmark"></i>';
-    modaleClose.addEventListener("click", () => {
-        modaleContainer.innerHTML = "";
-    });*/
+    const modalePage1 = createHtmlElement("div", "modale-page1", modaleWhite, null, null);
 
     const modaleClose = createHtmlElement("button", "modale-close", modalePage1, "click", () => {
         modaleContainer.innerHTML = "";
     });
     modaleClose.innerHTML = '<i class="fa-solid fa-xmark"></i>';
 
-    const modaleTitle = document.createElement("h2");
-    modaleTitle.className = "modale-title";
-    modalePage1.appendChild(modaleTitle);
+    const modaleTitle = createHtmlElement("h2", "modale-title", modalePage1, null, null);
     modaleTitle.innerText = "Galerie photo";
 
-    const modaleGallery = document.createElement("div");
-    modaleGallery.className = "modale-gallery";
-    modalePage1.appendChild(modaleGallery);
+    const modaleGallery = createHtmlElement("div", "modale-gallery", modalePage1, null, null);
     displayModaleImages(gallery, modaleGallery);
 
-    const addImage = document.createElement("button");
-    addImage.className = "add-image";
-    modalePage1.appendChild(addImage);
-    addImage.innerHTML = "Ajouter une photo";
-    addImage.addEventListener("click", () => {
+    const addImage = createHtmlElement("button", "add-image", modalePage1, "click", () => {
         modalePage2.className = "modale-page2 modale-slide-left";
     });
+    addImage.innerHTML = "Ajouter une photo";
 
-    const modalePage2 = document.createElement("div");
-    modalePage2.className = "modale-page2";
-    modaleWhite.appendChild(modalePage2);
+    const modalePage2 = createHtmlElement("div", "modale-page2", modaleWhite, null, null);
 
-    const modaleClose2 = document.createElement("button");
-    modaleClose2.className = "modale-close";
-    modalePage2.appendChild(modaleClose2);
-    modaleClose2.innerHTML = '<i class="fa-solid fa-xmark"></i>';
-    modaleClose2.addEventListener("click", () => {
+    const modaleClose2 = createHtmlElement("button", "modale-close", modalePage2, "click", () => {
         modaleContainer.innerHTML = "";
     });
+    modaleClose2.innerHTML = '<i class="fa-solid fa-xmark"></i>';
 
-    const modaleBack = document.createElement("button");
-    modaleBack.className = "modale-back";
-    modalePage2.appendChild(modaleBack);
-    modaleBack.innerHTML = '<i class="fa-solid fa-arrow-left"></i>';
-    modaleBack.addEventListener("click", () => {
+    const modaleBack = createHtmlElement("button", "modale-back", modalePage2, "click", () => {
         modalePage2.className = "modale-page2";
     });
+    modaleBack.innerHTML = '<i class="fa-solid fa-arrow-left"></i>';
 
-    const modaleTitle2 = document.createElement("h2");
-    modaleTitle2.className = "modale-title2";
-    modalePage2.appendChild(modaleTitle2);
+    const modaleTitle2 = createHtmlElement("h2", "modale-title2", modalePage2, null, null);
     modaleTitle2.innerText = "Ajout photo";
 
-    const form = document.createElement("form");
-    form.className = "modale-page2__form";
-    modalePage2.appendChild(form);
+    const form = createHtmlElement("form", "modale-page2__form", modalePage2, null, null);
 
-    const divAddImage = document.createElement("div");
-    divAddImage.className = "modale-page2__div-add-image";
+    const divAddImage = createHtmlElement("div", "modale-page2__div-add-image", form, null, null);
     divAddImage.innerHTML = '<i class="fa-regular fa-image modale-page2__icon"></i>';
-    form.appendChild(divAddImage);
 
     const inputFile = document.createElement("input");
     inputFile.name = "image";
@@ -91,10 +54,8 @@ function openModale(gallery) {
     inputFile.setAttribute("id", "file");
     divAddImage.appendChild(inputFile);
 
-    const inputFileLabel = document.createElement("label");
-    inputFileLabel.className = "modale-page2__file";
+    const inputFileLabel = createHtmlElement("label", "modale-page2__file", divAddImage, null, null);
     inputFileLabel.setAttribute("for", "file");
-    divAddImage.appendChild(inputFileLabel);
     inputFileLabel.innerText = "+ Ajouter photo";
     inputFile.addEventListener("change", (e) => {
         const imageDisplay = inputFile.files[0];
@@ -110,48 +71,30 @@ function openModale(gallery) {
         }
     });
 
-    const imagePreview = document.createElement("div");
-    imagePreview.className = "modale-page2__image-preview";
-    divAddImage.appendChild(imagePreview);
+    const imagePreview = createHtmlElement("div", "modale-page2__image-preview", divAddImage, null, null);
 
-    const tailleImage = document.createElement("p");
-    tailleImage.className = "modale-page2__taille-image";
-    tailleImage.innerText = "jpg, png : 4mo max";
-    divAddImage.appendChild(tailleImage);
+    const imageSize = createHtmlElement("p", "modale-page2__image-size", divAddImage, null, null);
+    imageSize.innerText = "jpg, png : 4mo max";
 
-    const formFieldTitle = document.createElement("div");
-    formFieldTitle.className = "form-field";
+    const formFieldTitle = createHtmlElement("div", "form-field", form, null, null);
     formFieldTitle.name = "title";
-    form.appendChild(formFieldTitle);
 
-    const titleLabel = document.createElement("label");
-    titleLabel.className = "title-label";
-    formFieldTitle.appendChild(titleLabel);
+    const titleLabel = createHtmlElement("label", "title-label", formFieldTitle, null, null);
     titleLabel.innerText = "Titre";
 
-    const modalePage2TextArea = document.createElement("input");
-    modalePage2TextArea.className = "modale-page2__text-area";
-    formFieldTitle.appendChild(modalePage2TextArea);
-    modalePage2TextArea.addEventListener("change", () => {
+    const modalePage2TextArea = createHtmlElement("input", "modale-page2__text-area", formFieldTitle, "change", () => {
         updateSubmitButton();
     });
 
-    const formFieldSelect = document.createElement("div");
-    formFieldSelect.className = "form-field";
-    form.appendChild(formFieldSelect);
+    const formFieldSelect = createHtmlElement("div", "form-field", form, null, null);
 
-    const categoryLabel = document.createElement("label");
-    categoryLabel.className = "title-label";
-    formFieldSelect.appendChild(categoryLabel);
+    const categoryLabel = createHtmlElement("label", "title-label", formFieldSelect, null, null);
     categoryLabel.innerText = "Catégorie";
 
-    const modalePage2Select = document.createElement("select");
-    modalePage2Select.name = "category";
-    modalePage2Select.className = "modale-page2__select";
-    formFieldSelect.appendChild(modalePage2Select);
-    modalePage2Select.addEventListener("change", () => {
+    const modalePage2Select = createHtmlElement("select", "modale-page2__select", formFieldSelect, "change", () => {
         updateSubmitButton();
     });
+    modalePage2Select.name = "category";
 
     fetch("http://localhost:5678/api/categories")
         .then((response) => response.json())
@@ -164,15 +107,11 @@ function openModale(gallery) {
             });
         });
 
-    const divBarre = document.createElement("div");
-    divBarre.className = "modale-page2__div-barre";
-    form.appendChild(divBarre);
+    const modalePage2__line = createHtmlElement("div", "modale-page2__line", form, null, null);
 
-    const submitButton = document.createElement("button");
-    submitButton.className = "submit-button";
+    const submitButton = createHtmlElement("button", "submit-button", form, null, null);
     submitButton.innerText = "Valider";
     submitButton.disabled = true;
-    form.appendChild(submitButton);
     form.addEventListener("submit", (e) => {
         e.preventDefault();
         const data = new FormData();
