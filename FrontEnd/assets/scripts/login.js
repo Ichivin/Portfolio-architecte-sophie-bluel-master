@@ -16,7 +16,7 @@ loginButton.addEventListener("click", (e) => {
     })
         .then((response) => response.json())
         .then((loginData) => {
-            if (!loginData.error) {
+            if (!loginData.error && loginData.token && loginData.userId) {
                 localStorage.setItem("Sophie_token", loginData.token);
                 localStorage.setItem("user_id", loginData.userId);
                 window.location.assign("./index.html");

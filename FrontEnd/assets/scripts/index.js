@@ -36,6 +36,7 @@ fetch("http://localhost:5678/api/categories")
         });
     });
 
+/*Ajout des elements lors de la connexion*/
 if (localStorage.getItem("Sophie_token")) {
     const editBlock = document.querySelector(".edit-block");
     editBlock.style.display = "flex";

@@ -1,5 +1,6 @@
-const divImage = document.getElementById("gallery");
+const galleryContainer = document.getElementById("gallery");
 
+/* fonction pour crée des elements dans modale.js*/
 function createHtmlElement(tag, className, parent, eventType, listenerCallBack) {
     const element = document.createElement(tag);
     if (className) {
@@ -12,9 +13,10 @@ function createHtmlElement(tag, className, parent, eventType, listenerCallBack) 
     return element;
 }
 
-function displayImages(images_, imagesContainer) {
+/* fonction pour afficher les images*/
+function displayImages(imagesTable, imagesContainer) {
     imagesContainer.innerHTML = "";
-    images_.forEach((image) => {
+    imagesTable.forEach((image) => {
         const figure = document.createElement("figure");
         const figCaption = document.createElement("figcaption");
         const figImage = document.createElement("img");
@@ -28,9 +30,10 @@ function displayImages(images_, imagesContainer) {
     });
 }
 
-function displayModaleImages(images_, imagesContainer) {
+/* fonction pour afficher les cadres d'image dans une modale*/
+function displayModalImages(imagesTable, imagesContainer) {
     imagesContainer.innerHTML = "";
-    images_.forEach((image) => {
+    imagesTable.forEach((image) => {
         const divImages = document.createElement("div");
         const figImage = document.createElement("img");
 
@@ -40,11 +43,11 @@ function displayModaleImages(images_, imagesContainer) {
         imagesContainer.appendChild(divImages);
         divImages.appendChild(figImage);
 
-        const modaleTrash = document.createElement("button");
-        modaleTrash.className = "modale-trash";
-        modaleTrash.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
-        divImages.appendChild(modaleTrash);
-        modaleTrash.addEventListener("click", () => {
+        const modalTrash = document.createElement("button");
+        modalTrash.className = "modale-trash";
+        modalTrash.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+        divImages.appendChild(modalTrash);
+        modalTrash.addEventListener("click", () => {
             fetch(`http://localhost:5678/api/works/${image.id}`, {
                 method: "DELETE",
                 headers: {
@@ -52,10 +55,10 @@ function displayModaleImages(images_, imagesContainer) {
                 },
             }).then((response) => {
                 if (response.ok) {
-                    images = [...images.filter((element) => element.id !== image.id)];
+                    allImagesTable = [...allImagesTable.filter((element) => element.id !== image.id)];
 
                     divImages.remove();
-                    displayImages(images, divImage);
+                    displayImages(allImagesTable, galleryContainer);
                 }
             });
         });

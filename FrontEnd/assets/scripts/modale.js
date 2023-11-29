@@ -100,6 +100,8 @@ function openModal(gallery) {
     modalePage2Select.name = "category";
     modalePage2Select.setAttribute("id", "modale-page2__select");
 
+    /* fetch choix des catégories dans l'ajout d'image*/
+
     fetch("http://localhost:5678/api/categories")
         .then((response) => response.json())
         .then((categories) => {
@@ -142,9 +144,13 @@ function openModal(gallery) {
                     const gallery = document.querySelector(".gallery");
                     displayImages(allImagesTable, gallery);
                 }
+            })
+            .catch((error) => {
+                alert("Une erreur inconnu est survenu : " + JSON.stringify(error));
             });
     });
 
+    /* fonction qui permet de verifier si tous les champs sont rempli lors d'ajout d'image*/
     function allFieldsAreFilled() {
         const validImage =
             inputFile.files[0] &&
@@ -156,6 +162,7 @@ function openModal(gallery) {
         return validImage && validTitle && validCategory;
     }
 
+    /* fonction qui permet d'activer le bouton de validation une fois que les champs sont rempli lors d'ajout d'image*/
     function updateSubmitButton() {
         if (allFieldsAreFilled()) {
             submitButton.disabled = false;
